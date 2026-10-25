@@ -1,0 +1,111 @@
+{
+  "id": "E129",
+  "value": 0.6,
+  "value_high_precision": "0.6",
+  "method": "Independent Python Decimal arithmetic at 80 significant digits; Taylor series for sine and arcsine, Decimal exp/sqrt, separate physical balance or geometry. No JavaScript imports.",
+  "cases": [
+    {
+      "name": "unused load blocks contribute zero",
+      "values": {
+        "loads": [
+          {
+            "n": 0,
+            "total": 1000
+          },
+          {
+            "n": 0,
+            "total": 500
+          }
+        ]
+      },
+      "expected": 0.0
+    },
+    {
+      "name": "nominal damage threshold exactly one",
+      "values": {
+        "loads": [
+          {
+            "n": 1,
+            "total": 2
+          },
+          {
+            "n": 2,
+            "total": 4
+          }
+        ]
+      },
+      "expected": 1.0
+    },
+    {
+      "name": "damage above one is not clamped",
+      "values": {
+        "loads": [
+          {
+            "n": 300,
+            "total": 100
+          }
+        ]
+      },
+      "expected": 3.0
+    },
+    {
+      "name": "five unequal load block fractions",
+      "values": {
+        "loads": [
+          {
+            "n": 1,
+            "total": 2
+          },
+          {
+            "n": 1,
+            "total": 3
+          },
+          {
+            "n": 1,
+            "total": 7
+          },
+          {
+            "n": 1,
+            "total": 11
+          },
+          {
+            "n": 1,
+            "total": 13
+          }
+        ]
+      },
+      "expected": 1.144022644022644
+    },
+    {
+      "name": "equal extreme cycle counts preserve unit damage",
+      "values": {
+        "loads": [
+          {
+            "n": 1e+308,
+            "total": 1e+308
+          }
+        ]
+      },
+      "expected": 1.0
+    },
+    {
+      "name": "zero fatigue life rejected",
+      "values": {
+        "loads": [
+          {
+            "n": 1,
+            "total": 0
+          }
+        ]
+      },
+      "throws": true
+    },
+    {
+      "name": "empty load list rejected",
+      "values": {
+        "loads": []
+      },
+      "throws": true
+    }
+  ]
+}
